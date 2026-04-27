@@ -1,0 +1,29 @@
+# macOS
+.DS_Store
+.DS_Store?
+._*
+
+# Claude Code 本機設定（個人，非專案共用）
+.claude/
+
+# Python 編譯快取
+__pycache__/
+*.pyc
+*.pyo
+
+# R console 歷史
+.Rhistory
+.RData
+
+# 盲測對照表（含答案，不公開）
+evaluation/_blind_mapping.json
+
+# Word 文件（二進位，git 無法追蹤差異；改用 PDF 或 Markdown）
+*.docx
+
+# 原始截圖（245 張 / 53MB，僅保留精選截圖）
+screenshots/chatgpt*/
+screenshots/Claude*/
+screenshots/deepseek*/
+screenshots/Gemini*/
+screenshots/TAIDE/

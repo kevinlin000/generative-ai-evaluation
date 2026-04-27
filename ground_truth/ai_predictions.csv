@@ -1,0 +1,16 @@
+Scenario,Model,Holding_1,Pct_1,Holding_2,Pct_2,Holding_3,Pct_3,Optimistic,Base,Pessimistic,Max_Drawdown_Estimate,Source,Notes
+A_2008,chatgpt,SPY,30,TLT,25,EFA,10,9.0,5.5,1.5,-25,Q5_JSON,Q2 table missing from docx; allocation from Q5 JSON
+A_2008,claude,T-BILL_3M_6M,30,VMMXX,15,VTI,14,9.5,4.5,-1.0,-20,Q5_JSON,Q2 table missing from docx; allocation from Q5 JSON
+A_2008,deepseek,T-bills_VMMXX,35,IEI,25,LQD,15,6.3,4.8,2.3,-20,Q2_MD,T-bills_VMMXX is combined; IEI=iShares 3-7yr UST; LQD=IG Corp Bond
+A_2008,gemini,IEF,25,VFICX,20,SPY,20,8.0,6.0,3.0,-18,Q5_JSON,Q2 table missing from docx; VFICX is Vanguard mutual fund (harder to look up)
+A_2008,taide,AGG_HYG,65,VTI_IVV,25,Cash_MMF,10,10.0,6.0,3.0,-20,Q2_MD,⚠️ 需手動填寫: AGG/HYG split unknown (both IG+HY in 65%); VTI/IVV split unknown in 25%; returns are midpoints of range
+B_2022,chatgpt,0050,25,2330,25,00878,15,15.0,7.0,-5.0,-22.5,Q5_JSON,Q2 table missing from docx; 2330=TSMC
+B_2022,claude,0050,18,VTI,18,00720B,15,9.0,6.0,0.0,-25,Q5_JSON,Q2 table missing from docx; 00720B=元大AAA-AA公司債
+B_2022,deepseek,0050,30,Cash_TWD,20,00878,15,9.0,5.0,-2.0,-20,Q2_MD,Cash_TWD=王道銀行1.5%活存; 00878=國泰永續高股息
+B_2022,gemini,TWD_CASH,40,006208,25,00719B,20,7.0,4.0,-7.5,-20,Q5_JSON,Q2 table missing from docx; 00719B=短天期美債; TWD_CASH≈1.5%活存
+B_2022,taide,2330,50,IXUS,30,Cash,20,11.0,9.3,7.4,-20,Q2_MD,⚠️ 需手動填寫: 50% TW stocks split between TSMC+中華電信 unknown; 30% global split between IXUS+VTI unknown; Opt/Base/Pess computed from per-asset ranges
+C_2024,chatgpt,0050,20,VOO,15,2330,15,12.0,7.0,1.0,-22,Q5_JSON,Q2 table missing from docx; VOO=Vanguard S&P500; 2330=TSMC
+C_2024,claude,TWD_TIME_DEPOSIT,20,00865B,15,00679B,15,9.0,5.5,0.0,-25,Q5_JSON,Q2 table missing from docx; 00865B=台灣短期公債; 00679B=元大美債20年; TWD_TIME_DEPOSIT≈1.7%
+C_2024,deepseek,VT,30,0050,20,00679B,20,7.0,5.0,0.5,-17,Q2_MD,00679B=元大美債20年; Max_Drawdown is midpoint of -15% to -18%
+C_2024,gemini,00679B_00720B,50,00646_VT,30,006208_00878,20,9.0,7.0,3.0,-18,Q5_JSON,⚠️ 需手動填寫: all 3 holdings are paired tickers with unknown splits; rep tickers used: 00679B/VT/006208
+C_2024,taide,0050,35,VTI,20,AGG,20,13.5,9.0,5.0,-30,Q2_MD,REITs 15% is 4th holding (excluded); AGG=iShares Core US Aggregate Bond

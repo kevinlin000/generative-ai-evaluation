@@ -1,0 +1,16 @@
+Scenario,Model,Actual_6M_Return,AI_Pessimistic_Annual,AI_Pessimistic_6M,AI_Base_6M,AI_Optimistic_6M,Diff_vs_Pessimistic,Verdict,Max_Drawdown_Est,Exceeded_Drawdown
+A_2008,chatgpt,-20.36,1.5,0.75,2.71,4.4,-21.11,Over-optimistic,-25.0,False
+A_2008,claude,-9.16,-1.0,-0.5,2.23,4.64,-8.66,Over-optimistic,-20.0,False
+A_2008,deepseek,1.07,2.3,1.14,2.37,3.1,-0.08,Accurate,-20.0,False
+A_2008,gemini,-10.78,3.0,1.49,2.96,3.92,-12.27,Over-optimistic,-18.0,False
+A_2008,taide,-18.97,3.0,1.49,2.96,4.88,-20.46,Over-optimistic,-20.0,False
+B_2022,chatgpt,-26.15,-5.0,-2.53,3.44,7.24,-23.61,Over-optimistic,-22.5,True
+B_2022,claude,-20.3,0.0,0.0,2.96,4.4,-20.3,Over-optimistic,-25.0,False
+B_2022,deepseek,-15.28,-2.0,-1.01,2.47,4.4,-14.27,Over-optimistic,-20.0,False
+B_2022,gemini,-5.58,-7.5,-3.82,1.98,3.44,-1.76,Accurate,-20.0,False
+B_2022,taide,-21.26,7.4,3.63,4.55,5.36,-24.89,Over-optimistic,-20.0,True
+C_2024,chatgpt,-0.23,1.0,0.5,3.44,5.83,-0.73,Accurate,-22.0,False
+C_2024,claude,0.66,0.0,0.0,2.71,4.4,0.66,Accurate,-25.0,False
+C_2024,deepseek,-0.84,0.5,0.25,2.47,3.44,-1.09,Accurate,-17.0,False
+C_2024,gemini,0.88,3.0,1.49,3.44,4.4,-0.61,Accurate,-18.0,False
+C_2024,taide,-0.51,5.0,2.47,4.4,6.54,-2.98,Accurate,-30.0,False

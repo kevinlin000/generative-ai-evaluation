@@ -1,0 +1,46 @@
+Scenario,Model,Holding_Rank,Ticker,Pct,Period_Start,Period_End,Asset_Type,Actual_Return_6M,Notes
+A_2008,chatgpt,1,SPY,30,2008-09-12,2009-03-12,US_Equity,-39.3,S&P500 SPDR ETF
+A_2008,chatgpt,2,TLT,25,2008-09-12,2009-03-12,US_LT_Bond,10.9,iShares 20yr+ Treasury ETF
+A_2008,chatgpt,3,EFA,10,2008-09-12,2009-03-12,Intl_Equity,-41.7,MSCI EAFE ETF
+A_2008,claude,1,T-BILL_3M,30,2008-09-12,2009-03-12,Cash,0.5,3-month T-bill (annualized rate ÷ 2 for 6M)
+A_2008,claude,2,VMMXX,15,2008-09-12,2009-03-12,Cash,0.5,Vanguard Prime Money Market (approx = T-bill)
+A_2008,claude,3,VTI,14,2008-09-12,2009-03-12,US_Equity,-40.2,Vanguard Total Market ETF
+A_2008,deepseek,1,IEI,35,2008-09-12,2009-03-12,US_MT_Bond,0.5,Rep. for T-bills+VMMXX bundle; use T-bill rate
+A_2008,deepseek,2,IEI,25,2008-09-12,2009-03-12,US_MT_Bond,5.8,iShares 3-7yr Treasury ETF
+A_2008,deepseek,3,LQD,15,2008-09-12,2009-03-12,IG_Corp_Bond,-5.5,iShares iBoxx IG Corporate Bond ETF
+A_2008,gemini,1,IEF,25,2008-09-12,2009-03-12,US_MT_Bond,7.8,iShares 7-10yr Treasury ETF
+A_2008,gemini,2,VFICX,20,2008-09-12,2009-03-12,IG_Corp_Bond,-5.5,Vanguard Intermediate-Term IG Fund (mutual fund; may need VICSX or LQD as proxy)
+A_2008,gemini,3,SPY,20,2008-09-12,2009-03-12,US_Equity,-39.3,S&P500 SPDR ETF
+A_2008,taide,1,AGG,32.5,2008-09-12,2009-03-12,US_Agg_Bond,1.6,AGG estimated 50% of 65% bond; HYG is the other 50%
+A_2008,taide,2,HYG,32.5,2008-09-12,2009-03-12,HY_Bond,-23.2,HYG estimated 50% of 65% bond
+A_2008,taide,3,VTI,25,2008-09-12,2009-03-12,US_Equity,-40.2,VTI+IVV bundled; assume equal split 12.5%+12.5%
+B_2022,chatgpt,1,0050,25,2022-01-04,2022-07-04,TW_Equity,-26.2,元大台灣50 ETF (TW listed)
+B_2022,chatgpt,2,2330,25,2022-01-04,2022-07-04,TW_Equity,-32.9,Taiwan Semiconductor Manufacturing Co (TSMC)
+B_2022,chatgpt,3,00878,15,2022-01-04,2022-07-04,TW_HighDiv,-14.8,國泰永續高股息 ETF
+B_2022,claude,1,0050,18,2022-01-04,2022-07-04,TW_Equity,-26.2,元大台灣50 ETF
+B_2022,claude,2,VTI,18,2022-01-04,2022-07-04,US_Equity,-20.6,Vanguard Total Market ETF
+B_2022,claude,3,00720B,15,2022-01-04,2022-07-04,TW_Corp_Bond,-12.85,元大AAA-AA公司債ETF (TW listed)
+B_2022,deepseek,1,0050,30,2022-01-04,2022-07-04,TW_Equity,-26.2,元大台灣50 ETF
+B_2022,deepseek,2,Cash_TWD,20,2022-01-04,2022-07-04,Cash,0.75,Taiwan high-interest savings (~1.5% annual; 0.75% for 6M)
+B_2022,deepseek,3,00878,15,2022-01-04,2022-07-04,TW_HighDiv,-14.8,國泰永續高股息 ETF
+B_2022,gemini,1,TWD_CASH,40,2022-01-04,2022-07-04,Cash,0.75,Taiwan cash/savings; use TW 1yr savings rate ÷ 2
+B_2022,gemini,2,006208,25,2022-01-04,2022-07-04,TW_Equity,-24.3,富邦台灣採樣50 ETF
+B_2022,gemini,3,00719B,20,2022-01-04,2022-07-04,US_ST_Bond,5.15,元大美國短期公債ETF (TW listed USD bond)
+B_2022,taide,1,2330,40,2022-01-04,2022-07-04,TW_Equity,-32.9,TSMC est. 35-40% of 50% TW stocks; 中華電信 est. 10-15%
+B_2022,taide,2,IXUS,30,2022-01-04,2022-07-04,Intl_Equity,-20.4,IXUS+VTI bundled; use IXUS as rep for intl portion
+B_2022,taide,3,Cash,20,2022-01-04,2022-07-04,Cash,0.75,Taiwan cash savings ~1.5% annual
+C_2024,chatgpt,1,0050,20,2024-07-11,2025-01-13,TW_Equity,-4.1,元大台灣50 ETF
+C_2024,chatgpt,2,VOO,15,2024-07-11,2025-01-13,US_Equity,5.2,Vanguard S&P500 ETF
+C_2024,chatgpt,3,2330,15,2024-07-11,2025-01-13,TW_Equity,-0.5,TSMC (TW listed)
+C_2024,claude,1,TWD_TIME_DEPOSIT,20,2024-07-11,2025-01-13,Cash,0.85,Taiwan time deposit ~1.7% annual; 0.85% for 6M
+C_2024,claude,2,00865B,15,2024-07-11,2025-01-13,TW_ST_Bond,2.30,台灣短期公債ETF (TW listed)
+C_2024,claude,3,00679B,15,2024-07-11,2025-01-13,US_LT_Bond,-1.25,元大美債20年ETF (TW listed)
+C_2024,deepseek,1,VT,30,2024-07-11,2025-01-13,Global_Equity,1.6,Vanguard Total World Stock ETF
+C_2024,deepseek,2,0050,20,2024-07-11,2025-01-13,TW_Equity,-4.1,元大台灣50 ETF
+C_2024,deepseek,3,00679B,20,2024-07-11,2025-01-13,US_LT_Bond,-1.25,元大美債20年ETF (TW listed)
+C_2024,gemini,1,00679B,25,2024-07-11,2025-01-13,US_LT_Bond,-1.25,00679B+00720B bundled at 50%; assume 25%+25%
+C_2024,gemini,2,00720B,25,2024-07-11,2025-01-13,US_Corp_Bond,2.14,00720B estimated 25% of 50% IG bond bundle
+C_2024,gemini,3,VT,30,2024-07-11,2025-01-13,Global_Equity,1.6,VT+00646 bundled at 30%; use VT as primary rep
+C_2024,taide,1,0050,35,2024-07-11,2025-01-13,TW_Equity,-4.1,元大台灣50 ETF
+C_2024,taide,2,VTI,20,2024-07-11,2025-01-13,US_Equity,5.75,Vanguard Total Market ETF
+C_2024,taide,3,AGG,20,2024-07-11,2025-01-13,US_Agg_Bond,-0.5,iShares Core US Aggregate Bond ETF

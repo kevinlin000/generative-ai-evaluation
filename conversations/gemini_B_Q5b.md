@@ -1,0 +1,87 @@
+{
+
+"timestamp": "2022-01-04",
+
+"overall_risk_score": 4,
+
+"asset_allocation": [
+
+{
+
+"category": "大盤成長部位",
+
+"ticker": "006208",
+
+"percentage": 25,
+
+"amount_twd": 200000,
+
+"reasoning": "參與台灣前50大企業長期成長，獲取市場長期平均報酬，作為資產累積主力。"
+
+},
+
+{
+
+"category": "價值防禦部位",
+
+"ticker": "00878",
+
+"percentage": 15,
+
+"amount_twd": 120000,
+
+"reasoning": "升息環境下高息價值股相對抗震，提供穩定配息現金流以減輕下行心理壓力。"
+
+},
+
+{
+
+"category": "固定收益與外匯",
+
+"ticker": "00719B",
+
+"percentage": 20,
+
+"amount_twd": 160000,
+
+"reasoning": "升息循環下避開長債跌價風險，以短天期美債對沖台股波動並賺取固定收益。"
+
+},
+
+{
+
+"category": "戰略現金部位",
+
+"ticker": "TWD_CASH",
+
+"percentage": 40,
+
+"amount_twd": 320000,
+
+"reasoning": "提供絕對下檔防禦，確保總資產回撤鎖定在20%內，並保留未來大幅修正時的加碼銀彈。"
+
+}
+
+],
+
+"expected_annual_return": {
+
+"optimistic": 7,
+
+"base": 4,
+
+"pessimistic": -7.5
+
+},
+
+"max_drawdown_estimate": -20,
+
+"rebalance_trigger": [
+
+"時間觸發：2022年7月初，檢視聯準會上半年實際升息次數及美國CPI是否出現降溫趨勢。",
+
+"點位觸發：加權指數回檔15%~20%（約落在14,800點至15,700點區間）時，啟動逢低加碼機制，將現金分批轉入大盤部位。"
+
+]
+
+}

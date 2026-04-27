@@ -1,0 +1,68 @@
+{
+"timestamp": "2008-09-12",
+"overall_risk_score": 7,
+"asset_allocation": [
+{
+"category": "US Large Cap Equity",
+"ticker": "SPY",
+"percentage": 30,
+"amount_twd": 240000,
+"reasoning": "美股核心曝險，長期成長來源"
+},
+{
+"category": "Healthcare Equity",
+"ticker": "XLV",
+"percentage": 8,
+"amount_twd": 64000,
+"reasoning": "醫療需求穩定，具防禦性"
+},
+{
+"category": "Consumer Staples Equity",
+"ticker": "XLP",
+"percentage": 7,
+"amount_twd": 56000,
+"reasoning": "必需消費抗衰退能力強"
+},
+{
+"category": "International Developed Equity",
+"ticker": "EFA",
+"percentage": 10,
+"amount_twd": 80000,
+"reasoning": "分散美國經濟週期風險"
+},
+{
+"category": "US Treasuries",
+"ticker": "TLT",
+"percentage": 25,
+"amount_twd": 200000,
+"reasoning": "降息環境下具避險效果"
+},
+{
+"category": "Short-Term Treasuries",
+"ticker": "SHY",
+"percentage": 10,
+"amount_twd": 80000,
+"reasoning": "提供流動性與穩定性"
+},
+{
+"category": "Cash",
+"ticker": "CASH",
+"percentage": 10,
+"amount_twd": 80000,
+"reasoning": "保留危機加碼彈性"
+}
+],
+"expected_annual_return": {
+"optimistic": 9,
+"base": 5.5,
+"pessimistic": 1.5
+},
+"max_drawdown_estimate": -25,
+"rebalance_trigger": [
+"S&P 500 再跌超過15%",
+"美國失業率突破7%",
+"新增大型金融機構破產",
+"Fed利率接近0並啟動量化寬鬆",
+"信用市場出現流動性凍結"
+]
+}

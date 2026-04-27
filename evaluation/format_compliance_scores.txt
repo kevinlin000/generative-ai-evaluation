@@ -1,0 +1,34 @@
+
+q5_outputs/chatgpt_A.json: 10/10
+
+q5_outputs/chatgpt_B.json: 10/10
+
+q5_outputs/chatgpt_C.json: 10/10
+
+q5_outputs/claude_A.json: 10/10
+
+q5_outputs/claude_B.json: 10/10
+
+q5_outputs/claude_C.json: 10/10
+
+q5_outputs/DeepSeek_A.json: 10/10
+
+q5_outputs/DeepSeek_B.json: 10/10
+
+q5_outputs/DeepSeek_C.json: 10/10
+
+q5_outputs/gemini_A.json: 10/10
+
+q5_outputs/gemini_B.json: 10/10
+
+q5_outputs/gemini_C.json: 10/10
+
+q5_outputs/TAIDE_A.json: 6/10
+  - amount_twd sum = 20389996, expected 800000
+  - percentage sum = 174.5, expected 100
+
+q5_outputs/TAIDE_B.json: 6/10
+  - amount_twd sum = 78416, expected 800000
+  - percentage sum = 98.03, expected 100
+
+q5_outputs/TAIDE_C.json: 10/10
