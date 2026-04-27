@@ -1,6 +1,6 @@
 # AI Investment Advisor Stress Test
 
-A controlled experiment evaluating 5 major LLMs (ChatGPT, Claude, Gemini, Perplexity, TAIDE) on their ability to give investment advice during three historical pre-crash moments — testing for temporal contamination, logical coherence, and structured output compliance.
+A controlled experiment evaluating 5 major LLMs (ChatGPT, Claude, Gemini, DeepSeek, TAIDE) on their ability to give investment advice during three historical pre-crash moments — testing for temporal contamination, logical coherence, and structured output compliance.
 
 ## Phase 1 (Current): Manual Prompt Engineering & Evaluation
 
@@ -13,17 +13,34 @@ A controlled experiment evaluating 5 major LLMs (ChatGPT, Claude, Gemini, Perple
 
 ```
 .
-├── prompts/                  # Scenario prompt templates + Q1–Q5 question chain
-│   ├── Scenario_A_2008.md    # 2008-09-12, pre-Lehman (3 days before)
-│   ├── Scenario_B_2022.md    # 2022-01-04, Taiwan TAIEX all-time-high eve
-│   ├── Scenario_C_2024.md    # 2024-07-11, AI boom peak
-│   └── Questions_1_to_5.md  # Q1 comprehension → Q5b strict JSON schema
-├── q5_outputs/               # Raw Q5b JSON outputs from each model (chatgpt_A.json, etc.)
+├── prompts/                     # Scenario prompt templates + Q1–Q5 question chain
+│   ├── Scenario_A_2008.md       # 2008-09-12, pre-Lehman (3 days before)
+│   ├── Scenario_B_2022.md       # 2022-01-04, Taiwan TAIEX all-time-high eve
+│   ├── Scenario_C_2024.md       # 2024-07-11, AI boom peak
+│   └── Questions_1_to_5.md      # Q1 comprehension → Q5b strict JSON schema
+├── conversations/               # Full Q1–Q5b transcripts per model per scenario
+│   └── {model}_{scenario}_Q{n}.md   # e.g. claude_A_Q3.md
+├── q5_outputs/                  # Raw Q5b JSON outputs from each model
+│   └── {model}_{scenario}.json  # e.g. chatgpt_A.json, taide_C.json
+├── evaluation/                  # Scoring results (blind + unblind)
+│   ├── {blind_id}_{question}.md # Per-question evaluation notes
+│   ├── llm_judge_scores.md      # LLM-as-judge scores
+│   ├── human_quick_scores.md    # Human reviewer scores
+│   ├── agreement_analysis.md    # Inter-rater agreement
+│   └── final_scores.csv         # Merged final scores
+├── ground_truth/                # Historical price data for backtesting Q5
+│   ├── ai_predictions.csv       # Extracted model portfolio predictions
+│   ├── actual_returns_template.csv
+│   └── comparison.csv           # Prediction vs. actual return comparison
+├── 股價相關統計數據/               # TWSE / Yahoo Finance price screenshots & CSVs
+├── screenshots/
+│   └── 精選截圖/                 # Curated highlight screenshots for reporting
 ├── scripts/
-│   └── parse_q5_output.py    # Auto-score JSON compliance (0–10 per model per scenario)
-├── screenshots/              # Ground-truth data screenshots from TWSE / Yahoo Finance
-├── evaluation_matrix.csv     # 6-dimension scoring table (15 rows: 3 scenarios × 5 models)
-└── AI崩盤前夕測試_第一次報告腳本_v2.docx   # Master experiment script
+│   ├── parse_q5_output.py       # Auto-score JSON schema compliance (0–10)
+│   ├── build_evaluation.py      # Assemble blind evaluation packets
+│   ├── compute_ground_truth.py  # Calculate actual returns vs. AI predictions
+│   └── generate_reports.py      # Produce summary CSVs and markdown reports
+└── evaluation_matrix.csv        # 6-dimension scoring table (15 rows: 3 scenarios × 5 models)
 ```
 
 **Q5 output naming convention:** `q5_outputs/{model}_{scenario}.json`
