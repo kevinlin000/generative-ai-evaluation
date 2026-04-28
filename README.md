@@ -10,7 +10,7 @@
 
 ---
 
-## 🎯 What is AI Critic?
+##  What is AI Critic?
 
 **AI Critic** is an end-to-end production-grade evaluation platform that audits generative AI systems across multiple modalities — text, image, and music. It demonstrates the full lifecycle an AI Application Engineer's craft: from **research methodology**, through **engineering production**, to **product delivery**.
 
@@ -26,7 +26,7 @@ The same evaluation framework — built on **dual-track scoring**, **temporal co
 
 ---
 
-## 🌐 中文摘要 (Chinese Summary)
+##  中文摘要 (Chinese Summary)
 
 **AI Critic** 是一個跨模態 AI 評估與信任平台，目的是系統性地審計生成式 AI 系統的可信度。
 
@@ -40,7 +40,7 @@ The same evaluation framework — built on **dual-track scoring**, **temporal co
 
 ---
 
-## 🏗️ Project Architecture
+##  Project Architecture
 
 ```
 AI Critic
@@ -103,30 +103,30 @@ A controlled experiment auditing **5 leading LLMs** at **3 historical pre-crash 
 
 ### Key Findings
 
-#### 🔍 Finding 1: AI Systematically Underestimates Crashes
+####  Finding 1: AI Systematically Underestimates Crashes
 8 out of 10 advisor responses at pre-crash moments were **over-optimistic**. Worst case: TAIDE on B_2022 missed actual return by **−24.9 percentage points**.
 
 > *AI performs well in calm markets, but systematically fails at the eve of a crash — exactly when warnings matter most.*
 
-#### 🔍 Finding 2: LLM Judges Show Self-Preference Bias (Emergent)
+####  Finding 2: LLM Judges Show Self-Preference Bias (Emergent)
 When using Claude Opus 4.7 as the judge, scores for Claude's own responses were **systematically inflated by 11 points** — concentrated in the Temporal Contamination dimension.
 
 This is consistent with academic findings on Self-Preference Bias in LLM-as-a-Judge frameworks. **Single-source AI evaluation is unreliable.**
 
-#### 🔍 Finding 3: Native Models Fail at Structured Output
+####  Finding 3: Native Models Fail at Structured Output
 TAIDE produced fluent natural language but failed JSON Schema compliance in 2 of 3 scenarios (e.g., percentage sums of 174.5%). **Fluent ≠ Production-ready.**
 
 ### Phase 1 Deliverables
 
-- 📄 **75-conversation dataset** with full transcripts ([`./phase-1-text-evaluation/conversations/`](./phase-1-text-evaluation/conversations/))
-- 📊 **Evaluation matrix** with 450 individual scores ([`final_scores.csv`](./phase-1-text-evaluation/evaluation/final_scores.csv))
-- 📈 **Inter-rater agreement analysis** (Pearson r = 0.801) ([`agreement_analysis.md`](./phase-1-text-evaluation/evaluation/agreement_analysis.md))
-- 🎯 **Ground truth alignment** with real 6-month historical returns ([`comparison.csv`](./phase-1-text-evaluation/ground_truth/comparison.csv))
-- 🎤 **19-page research presentation** in Chinese ([`./phase-1-text-evaluation/docs/`](./phase-1-text-evaluation/docs/))
+-  **75-conversation dataset** with full transcripts ([`./phase-1-text-evaluation/conversations/`](./phase-1-text-evaluation/conversations/))
+-  **Evaluation matrix** with 450 individual scores ([`final_scores.csv`](./phase-1-text-evaluation/evaluation/final_scores.csv))
+-  **Inter-rater agreement analysis** (Pearson r = 0.801) ([`agreement_analysis.md`](./phase-1-text-evaluation/evaluation/agreement_analysis.md))
+-  **Ground truth alignment** with real 6-month historical returns ([`comparison.csv`](./phase-1-text-evaluation/ground_truth/comparison.csv))
+-  **19-page research presentation** in Chinese ([`./phase-1-text-evaluation/docs/`](./phase-1-text-evaluation/docs/))
 
 ---
 
-## 🛠️ Phase 2: Image Generation AI Audit System (In Progress)
+##  Phase 2: Image Generation AI Audit System (In Progress)
 
 ### Goal
 Convert the manual research methodology of Phase 1 into a **production-grade, automated evaluation pipeline** — testing the cross-modal portability of the framework on image generation AI.
@@ -200,7 +200,7 @@ Convert the manual research methodology of Phase 1 into a **production-grade, au
 
 ---
 
-## 🚀 Phase 3: Music Generation Platform (Planned)
+##  Phase 3: Music Generation Platform (Planned)
 
 ### Goal
 Package the Phase 2 evaluation pipeline into a **deployable, interactive product** — extending the methodology to audio modality with music generation AI.
@@ -250,7 +250,7 @@ NEW EVALUATION CAPABILITIES
 
 ---
 
-## 📚 Repository Structure
+##  Repository Structure
 
 ```
 ai-critic/
@@ -293,7 +293,7 @@ ai-critic/
 
 ---
 
-## 💡 Why This Project Matters
+##  Why This Project Matters
 
 This repository is more than a coursework deliverable. It is a deliberate demonstration of how an AI Application Engineer should think and build:
 
@@ -325,22 +325,6 @@ A 0–10 self-assessment metric that asks the AI directly: *"Did you use informa
 By scoring the same outputs through both human evaluators and LLM-as-a-Judge, then measuring divergence, we can quantitatively detect when an LLM judge is biased toward its own model family. This finding (an emergent discovery in Phase 1) shapes the evaluation design across all subsequent phases.
 
 ---
-
-## 👤 About the Author
-
-I am transitioning into AI Application Engineering from a background in **finance and data engineering**. Before this project I built:
-
-- A YouBike ETL pipeline (Python, real-world data engineering)
-- A restaurant management system (Java, Spring AI, RAG, JPA)
-
-This project is my deliberate study in **what it takes to ship production-grade AI systems** — beyond using AI, learning how to engineer around its limitations.
-
-If this work resonates with your team's needs, I would welcome the opportunity to discuss further.
-
-📫 [Your Email] · 🔗 [Your LinkedIn] · 💼 [Your Resume]
-
----
-
 ## 📝 License
 
 MIT License — see [LICENSE](./LICENSE) file for details.
@@ -349,11 +333,10 @@ This repository is open-source so others may build on the methodology. Contribut
 
 ---
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 This project was developed with substantial use of **Claude Code** as the primary development assistant — a deliberate methodological choice consistent with the evaluation framework being studied. Phase 1 conversations were conducted manually via web interfaces of each LLM provider to preserve real user-facing behaviors (including system prompts and search augmentations) that pure API access would mask.
 
-Special thanks to **Generative AI Application Foundations** course at [Your University] for providing the academic context within which this project took shape.
 
 ---
 
