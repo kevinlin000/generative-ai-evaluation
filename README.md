@@ -1,343 +1,75 @@
-# AI Critic
-### A Cross-Modal Generative AI Evaluation & Trust Platform
+# 生成式 AI 評估
 
-> *"AI is not unusable — you just need to know where it fails before you trust it."*
+跨文字、圖像、影片三種模態的生成式模型比較與評估。三份報告共用同一套方法:固定輸入、控制變因,對多個模型施以相同測試,再依明確維度評分、歸因差異並迭代修正。
 
-[![Phase 1](https://img.shields.io/badge/Phase%201-Complete-success)](./phase-1-text-evaluation)
-[![Phase 2](https://img.shields.io/badge/Phase%202-In%20Progress-yellow)](./phase-2-image-evaluation)
-[![Phase 3](https://img.shields.io/badge/Phase%203-Planned-lightgrey)](./phase-3-music-platform)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+中文 / [English](./README.en.md)
 
----
 
-##  What is AI Critic?
+## 報告一:文字模型在崩盤前夕的投資建議可信度
 
-**AI Critic** is an end-to-end production-grade evaluation platform that audits generative AI systems across multiple modalities — text, image, and music. It demonstrates the full lifecycle an AI Application Engineer's craft: from **research methodology**, through **engineering production**, to **product delivery**.
+**問題。** 在市場崩盤前夕,LLM 給出的投資建議是否可信?
 
-This project is structured as a three-phase journey, each phase introducing a new modality to test and a new layer of engineering depth:
+**設計。** 受控實驗,對五個模型(ChatGPT 5.3、Claude Opus 4.7、Gemini 3.1 Pro、DeepSeek R1、TAIDE)在三個歷史崩盤前夕(2008 雷曼、2022 台股高點、2024 AI 熱潮頂點)各施以同一條五階段提示詞鏈:理解力檢查、建議生成、逆向質疑、時間污染探測、JSON schema 服從。三個情境僅替換時間點與市場數據,其餘指令與個案約束完全一致,使表現差異得以歸因於時間點本身。共 75 段對話,全程保留逐字稿。
 
-| Phase | Modality Tested | Engineering Layer | Status |
-|-------|----------------|-------------------|--------|
-| **Phase 1** | Text Generation AI (5 LLMs) | Research & Methodology | ✅ Complete |
-| **Phase 2** | Image Generation AI (4 models) | Agentic Pipeline & RAG | 🟡 In Progress |
-| **Phase 3** | Music Generation AI (4 models) | Production & Deployment | ⚪ Planned |
+**評分。** 6 個維度,採雙軌評分(人工與 LLM-as-judge),評分者間一致性 Pearson r = 0.801。
 
-The same evaluation framework — built on **dual-track scoring**, **temporal contamination detection**, and **ground truth alignment** — is applied across all three phases, proving its cross-modal generalizability.
+**結果。**
+- 系統性低估下行風險:2008 與 2022 前夕各有 4/5 模型過度樂觀,偏差最大者(TAIDE,2022)與實際半年報酬相差 24.9 個百分點;僅 2024(最接近訓練資料邊界、後續走勢尚短)全員準確。
+- LLM-as-judge 的 self-preference bias:以 Claude 為評審時,對 Claude 自身回覆系統性高估約 11 分,集中於「時間污染」維度,顯示單一模型評分不可靠,須輔以人工或多模型交叉驗證。
+- 流暢度不等於可用性:TAIDE 自然語言流暢,但在三分之二的情境未通過 JSON schema 驗證(百分比加總達 174.5%),輸出無法被後端解析。
 
----
+詳見 `01-text-llm-evaluation/`:對話逐字稿、評分矩陣、與真實歷史報酬的對齊、簡報與講稿。
 
-##  中文摘要 (Chinese Summary)
 
-**AI Critic** 是一個跨模態 AI 評估與信任平台，目的是系統性地審計生成式 AI 系統的可信度。
+## 報告二:圖像模型對暗示型提示的語意聯想
 
-整個專案由三個階段組成，呼應 AI 應用工程師從「研究」到「工程」到「產品」的完整職涯弧線：
+**問題。** 當提示詞刻意不指名、僅給語意線索時,模型優先聯想到什麼?
 
-- **Phase 1（已完成）**：文字生成 AI 評估方法論——5 個主流 LLM 在 3 個歷史金融崩盤前夕的破壞性壓力測試。建立 6 維度評估框架、發現 LLM Self-Preference Bias 證據、提出 Temporal Contamination Index。
-- **Phase 2（進行中）**：圖像生成 AI 自動化評估系統——以 LangGraph + RAG + Human-in-the-Loop 重構評估流程，整合 FastAPI 後端與 SQLAlchemy 資料層。
-- **Phase 3（規劃中）**：音樂生成 AI 產品化平台——Streamlit 前端 + Docker 容器化 + Hugging Face Spaces 部署。
+**設計。** 設計 18 組暗示型提示(以特徵、場景、年代描述取代直接指名),對 GPT 與 Gemini 施以相同輸入,依輸出分為三型:文化共識(兩模型收斂至同一指涉)、語意分歧(同一描述被解讀為不同人物或不同年代)、安全邊界(拒絕、改以歷史或抽象替代、或觸發版權過濾)。
 
-詳細中文研究報告與簡報資料請見 [`phase-1-text-evaluation/docs/`](./phase-1-text-evaluation/docs/)。
+**觀察。** 圖像生成並非單純的文字到像素映射;輸出是模型在訓練資料記憶、語境權重與平台安全規則三者之間做出的選擇。因此除相似度外,更具判讀價值的問題是:模型為何如此聯想、忽略了哪些線索、又受哪些規則限制。
 
----
+**使用提醒。** 部分提示在測試模型是否會生成可辨識的真實政治人物。若納入公開作品集,宜以「模型行為與安全邊界的觀察」為論述主軸,避免以「使 AI 繪出特定政治人物」呈現,後者易被誤讀。
 
-##  Project Architecture
+詳見 `02-image-model-association/`。
 
-```
-AI Critic
-│
-├── Phase 1: Research Methodology Foundation
-│   └─ Establish "what dimensions matter" before building automation
-│
-├── Phase 2: Engineering Production
-│   └─ Turn methodology into a reproducible, programmable pipeline
-│
-└── Phase 3: Product Delivery
-    └─ Package the pipeline into a deployable, interactive product
-```
 
-### Technology Stack (Combined Across Phases)
+## 報告三:文字到影片的端到端生成流程
 
-| Layer | Technologies |
-|-------|-------------|
-| **AI Frameworks** | LangChain · LangGraph · LangChain Tools |
-| **LLM APIs** | OpenAI · Anthropic · Google Gemini · DeepSeek · TAIDE |
-| **Image Models** | DALL-E 3 · Stable Diffusion XL · Imagen 3 · Replicate |
-| **Music Models** | Suno · Udio · MusicGen · ElevenLabs Music |
-| **RAG Stack** | ChromaDB (vector) · BM25 (full-text) · Cohere Rerank |
-| **Backend** | Python 3.11 · FastAPI · SQLAlchemy · PostgreSQL · async/asyncio |
-| **Streaming** | Server-Sent Events (SSE) · WebSocket |
-| **Frontend** | Streamlit · Plotly |
-| **Infrastructure** | Docker · Docker Compose · GitHub Actions CI/CD |
-| **Deployment** | Hugging Face Spaces · Streamlit Cloud |
-| **Dev Tooling** | Claude Code · uv · pytest · ruff |
+**目標。** 串接三種模態(文字生腳本、圖像生角色、影片生動畫),產出一支約兩分鐘的水墨武俠短片《松風武林·物件導向之卷》,以敘事講解物件導向的封裝、繼承、多型,並於每一階段進行模型比較。
 
----
+**各階段決策。**
+- 腳本(ChatGPT vs Gemini):同一份世界觀輸入。Gemini 在結構與概念清晰度較佳,ChatGPT 在趣味性較佳;最終融合兩者,並於每幕結尾插入將武俠意象對應回程式術語的字幕,作為教學錨點。
+- 角色(GPT image 2.0 vs Gemini Nano Banana):Gemini 可自動產出多視角設定圖、角色一致性高,但第三幕「多型」需三角色同框且須在一秒內以配色辨識,故選用 GPT image 2.0。取捨依據為任務適配度,而非視覺華麗度。
+- 影片(原訂 Sora,改用 Google Flow / Veo):Sora 於 2026/04 停止服務,工作流即時切換至 Veo,上游素材無須重製,後製以剪映完成。
 
-## ✅ Phase 1: Text Generation AI Evaluation (Complete)
+**技術心得。**
+- 角色一致性:利用 Flow 的「角色」建檔功能鎖定固定參考圖,強制每段生成綁定該參考,以抑制跨鏡頭的外觀漂移。
+- 提示詞控制:固定鏡頭、主體置中;關鍵細節明確寫定並反覆強調;明確排除畫面外人物,否則易出現多餘肢體。未明確指定之處,模型會自行填補,且多半不利。
+- 評估標準:以「是否達成預期效果」為單一指標。多角色同框因仍會漂移,誠實評為 3/5。
 
-### Research Question
-> *Can we trust AI investment advisors at the eve of a market crash?*
+成品影片:https://www.youtube.com/watch?v=xWoazdwDa2A  詳見 `03-video-oop-pipeline/`。
 
-### Methodology
 
-A controlled experiment auditing **5 leading LLMs** at **3 historical pre-crash moments** through a **5-stage prompt chain**, totaling **75 conversations** with full transcripts retained.
+## 限制
 
-| Models Tested | Historical Scenarios | Question Chain |
-|--------------|---------------------|----------------|
-| ChatGPT (GPT-5.3) | A: 2008/09/12 — Lehman pre-collapse | Q1: Comprehension Check |
-| Claude (Opus 4.7) | B: 2022/01/04 — Taiwan stock peak | Q2: Recommendation Generation |
-| Gemini (3.1 Pro) | C: 2024/07/11 — AI bubble peak | Q3: Adversarial Pushback |
-| DeepSeek (R1) | | Q4: Temporal Contamination Probe |
-| TAIDE (12B-Chat-2602) | | Q5: JSON Schema Compliance |
+三份皆為小規模案例研究,非統計顯著的實證研究:樣本量小、提示詞由作者設計、生成具隨機性(重跑結果會變動)。報告一所用的 LLM 評審本身帶有偏誤,已以人工評分平衡但無法消除;2024 情境的真實值僅累積數個月,長期可靠度尚待驗證。
 
-### Evaluation Framework
 
-**Six custom dimensions**, each scored 1–5 by both human and LLM-as-a-Judge:
+## 工具
 
-1. **Comprehension** — Does the AI grasp critical market signals?
-2. **Specificity** — Concrete tickers and amounts vs. vague platitudes?
-3. **Risk Disclosure** — Does it volunteer drawdown estimates?
-4. **Logical Coherence** — Does it hold its position under adversarial questioning?
-5. **Temporal Contamination Index** ⭐ — Does it leak post-hoc information from training data?
-6. **Format Compliance** ⭐ — Can the JSON output be parsed by a backend without human cleanup?
+文字:ChatGPT、Claude、Gemini、DeepSeek、TAIDE,皆透過網頁介面而非 API,以保留含系統提示與檢索增強在內的真實使用者端行為。圖像:GPT image 2.0、Gemini(Nano Banana)。影片:Google Flow(Veo),剪輯使用剪映。評分與分析:Python。
 
-### Key Findings
 
-####  Finding 1: AI Systematically Underestimates Crashes
-8 out of 10 advisor responses at pre-crash moments were **over-optimistic**. Worst case: TAIDE on B_2022 missed actual return by **−24.9 percentage points**.
-
-> *AI performs well in calm markets, but systematically fails at the eve of a crash — exactly when warnings matter most.*
-
-####  Finding 2: LLM Judges Show Self-Preference Bias (Emergent)
-When using Claude Opus 4.7 as the judge, scores for Claude's own responses were **systematically inflated by 11 points** — concentrated in the Temporal Contamination dimension.
-
-This is consistent with academic findings on Self-Preference Bias in LLM-as-a-Judge frameworks. **Single-source AI evaluation is unreliable.**
-
-####  Finding 3: Native Models Fail at Structured Output
-TAIDE produced fluent natural language but failed JSON Schema compliance in 2 of 3 scenarios (e.g., percentage sums of 174.5%). **Fluent ≠ Production-ready.**
-
-### Phase 1 Deliverables
-
--  **75-conversation dataset** with full transcripts ([`./phase-1-text-evaluation/conversations/`](./phase-1-text-evaluation/conversations/))
--  **Evaluation matrix** with 450 individual scores ([`final_scores.csv`](./phase-1-text-evaluation/evaluation/final_scores.csv))
--  **Inter-rater agreement analysis** (Pearson r = 0.801) ([`agreement_analysis.md`](./phase-1-text-evaluation/evaluation/agreement_analysis.md))
--  **Ground truth alignment** with real 6-month historical returns ([`comparison.csv`](./phase-1-text-evaluation/ground_truth/comparison.csv))
--  **19-page research presentation** in Chinese ([`./phase-1-text-evaluation/docs/`](./phase-1-text-evaluation/docs/))
-
----
-
-##  Phase 2: Image Generation AI Audit System (In Progress)
-
-### Goal
-Convert the manual research methodology of Phase 1 into a **production-grade, automated evaluation pipeline** — testing the cross-modal portability of the framework on image generation AI.
-
-### Models to Test
-- DALL-E 3 (OpenAI)
-- Stable Diffusion XL (Stability AI / Replicate)
-- Imagen 3 (Google)
-- One open-source or local model TBD
-
-### System Architecture
+## 結構
 
 ```
-                    ┌────────────────────┐
-                    │   FastAPI Backend  │
-                    │   (SSE Streaming)  │
-                    └──────────┬─────────┘
-                               │
-               ┌───────────────┴────────────────┐
-               ▼                                ▼
-     ┌─────────────────┐            ┌──────────────────┐
-     │   LangGraph     │            │   RAG Pipeline   │
-     │   Agent Flow    │            │                  │
-     │                 │◄───────────┤  ChromaDB        │
-     │ ① Prompt        │   eval     │  (vector store)  │
-     │   Refiner       │   criteria │                  │
-     │   (Tool Use)    │            │  BM25 keyword    │
-     │                 │            │                  │
-     │ ② Multi-Model   │            │  Cohere Rerank   │
-     │   Generator     │            └──────────────────┘
-     │   (4 parallel)  │
-     │                 │            ┌──────────────────┐
-     │ ③ Auto Eval     │            │  PostgreSQL +    │
-     │   - CLIP score  │───────────►│  SQLAlchemy      │
-     │   - Aesthetic   │            │  (eval history)  │
-     │   - Safety      │            └──────────────────┘
-     │                 │
-     │ ④ Human-in-the- │            ┌──────────────────┐
-     │   Loop ⭐       │◄───────────┤  Frontend        │
-     │                 │   verify   │  (verification)  │
-     │ ⑤ Verdict       │            └──────────────────┘
-     └─────────────────┘
+generative-ai-evaluation/
+├── README.md        # 中文
+├── README.en.md     # English
+├── 01-text-llm-evaluation/
+├── 02-image-model-association/
+└── 03-video-oop-pipeline/
 ```
 
-### Engineering Capabilities Demonstrated
-
-| Capability | Implementation |
-|-----------|---------------|
-| **LangGraph Multi-Node Workflow** | 5-node agent pipeline with conditional branching |
-| **LangChain Tools** | Prompt Refiner, Safety Classifier, CLIP Evaluator |
-| **Async Parallel API Calls** | 4 image models invoked concurrently via `asyncio.gather` |
-| **RAG Pipeline** | Vector + keyword hybrid retrieval with reranking |
-| **Vector Database** | ChromaDB indexing evaluation criteria documents |
-| **Human-in-the-Loop** | Pause node awaiting human verification via WebSocket |
-| **FastAPI + SSE** | Real-time streaming of generation progress |
-| **SQLAlchemy ORM** | Schema-defined evaluation history persistence |
-| **System Prompt Engineering** | Strict JSON Schema enforcement |
-| **Anti-Hallucination Guardrails** | Fallback chains, output validation, retry logic |
-
-### Timeline (12 Weeks)
-
-| Weeks | Milestone |
-|-------|-----------|
-| 1–2 | LangChain/LangGraph fundamentals, FastAPI scaffolding, ChromaDB setup |
-| 3–4 | Multi-model image generation node with parallel async calls |
-| 5–6 | Auto Evaluator: CLIP alignment, aesthetic scoring, safety classification |
-| 7–8 | Full RAG pipeline with hybrid retrieval and reranking |
-| 9–10 | Human-in-the-Loop integration, FastAPI SSE streaming, SQLAlchemy persistence |
-| 11 | Run full experiments across 4 models × N test cases |
-| 12 | Documentation, presentation, GitHub release |
-
----
-
-##  Phase 3: Music Generation Platform (Planned)
-
-### Goal
-Package the Phase 2 evaluation pipeline into a **deployable, interactive product** — extending the methodology to audio modality with music generation AI.
-
-### Models to Test
-- Suno
-- Udio
-- MusicGen (Meta)
-- ElevenLabs Music
-
-### Production Layer Additions
-
-```
-NEW FRONTEND LAYER
-├── Streamlit Dashboard
-│   ├── Real-time multi-model generation viewer
-│   ├── Human-in-the-Loop verification UI
-│   └── A/B test result visualizations
-└── WebSocket live updates
-
-NEW INFRASTRUCTURE
-├── Docker Compose orchestration
-│   ├── frontend container
-│   ├── backend container
-│   ├── PostgreSQL container
-│   └── ChromaDB container
-├── GitHub Actions CI/CD
-└── Hugging Face Spaces deployment
-
-NEW EVALUATION CAPABILITIES
-├── Audio fidelity scoring
-├── Genre coherence analysis
-├── Lyric-melody alignment
-└── Blind A/B testing engine
-```
-
-### Engineering Capabilities Added in Phase 3
-
-- Docker / Docker Compose multi-service orchestration
-- WebSocket-based concurrent request handling
-- CI/CD automation via GitHub Actions
-- Cloud deployment (Hugging Face Spaces)
-- Domain-Driven Design layered architecture
-- Cross-modal evaluation methodology
-- Interactive data visualization
-- Bash deployment scripting
-
----
-
-##  Repository Structure
-
-```
-ai-critic/
-├── README.md                        # This file
-│
-├── phase-1-text-evaluation/         # ✅ Complete
-│   ├── conversations/               # 90 conversation transcripts
-│   ├── evaluation/                  # Scoring data and analyses
-│   ├── ground_truth/                # Real historical return alignments
-│   ├── prompts/                     # Scenario prompts (A/B/C)
-│   ├── q5_outputs/                  # JSON schema outputs
-│   ├── scripts/                     # Evaluation scripts
-│   ├── screenshots/                 # Critical conversation screenshots
-│   └── docs/                        # Research report + presentation
-│
-├── phase-2-image-evaluation/        # 🟡 In Progress
-│   ├── src/
-│   │   ├── agents/                  # LangGraph agent definitions
-│   │   ├── api/                     # FastAPI routes
-│   │   ├── models/                  # SQLAlchemy ORM
-│   │   ├── rag/                     # RAG pipeline
-│   │   └── evaluators/              # CLIP, aesthetic, safety
-│   ├── tests/
-│   ├── notebooks/                   # Experimentation
-│   ├── docker-compose.yml
-│   └── README.md
-│
-├── phase-3-music-platform/          # ⚪ Planned
-│   ├── frontend/                    # Streamlit app
-│   ├── backend/                     # FastAPI + LangGraph
-│   ├── infrastructure/              # Docker + CI/CD
-│   └── README.md
-│
-├── docs/                            # Cross-phase documentation
-│   ├── methodology.md               # Evaluation framework explanation
-│   └── findings.md                  # Cross-phase insights
-│
-└── LICENSE
-```
-
----
-
-##  Why This Project Matters
-
-This repository is more than a coursework deliverable. It is a deliberate demonstration of how an AI Application Engineer should think and build:
-
-1. **Research before engineering** — You cannot automate what you have not first manually validated
-2. **Engineering before product** — A reusable pipeline is more valuable than a one-off study
-3. **Product before stardom** — A deployable demo is the final test of whether a system actually works
-
-Each phase builds on the previous, while introducing new modalities to ensure the methodology generalizes — not just memorizes.
-
-### What This Project Does Not Do (Honesty)
-
-- This is **not** statistically significant research — 3 historical scenarios is a case study, not a census
-- The LLM-as-a-Judge has **known biases** (documented and counterbalanced via dual-track human scoring)
-- Phase 1's ground truth on 2024 data has only **8 months of post-event observation** — long-term reliability remains untested
-- This is **a single engineer's portfolio project**, not an audited industrial system
-
-A research that claims to have no limitations is the least credible research.
-
----
-
-## 🔬 Methodological Innovations
-
-Two original contributions emerged from Phase 1 that will carry through all phases:
-
-### 1. Temporal Contamination Index
-A 0–10 self-assessment metric that asks the AI directly: *"Did you use information you wouldn't have known at the time?"* Combined with cross-validated detection of post-hoc reasoning, this index reveals which models bleed future knowledge into historical scenarios.
-
-### 2. Dual-Track Scoring with Self-Preference Detection
-By scoring the same outputs through both human evaluators and LLM-as-a-Judge, then measuring divergence, we can quantitatively detect when an LLM judge is biased toward its own model family. This finding (an emergent discovery in Phase 1) shapes the evaluation design across all subsequent phases.
-
----
-## 📝 License
-
-MIT License — see [LICENSE](./LICENSE) file for details.
-
-This repository is open-source so others may build on the methodology. Contributions, issues, and forks are welcome.
-
----
-
-##  Acknowledgments
-
-This project was developed with substantial use of **Claude Code** as the primary development assistant — a deliberate methodological choice consistent with the evaluation framework being studied. Phase 1 conversations were conducted manually via web interfaces of each LLM provider to preserve real user-facing behaviors (including system prompts and search augmentations) that pure API access would mask.
-
-
----
-
-*Last updated: 2026-04-28*
+授權:MIT。
