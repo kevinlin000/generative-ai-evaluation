@@ -5,6 +5,47 @@ This repository contains three evaluation projects across text, image, and video
 [中文](./README.md) / English
 
 
+## Project previews
+
+<table>
+  <tr>
+    <td width="33%" valign="top">
+      <a href="./01-text-llm-evaluation/">
+        <img src="./assets/readme-previews/report-1-text-llm-evaluation.svg" alt="Report 1 preview" width="100%">
+      </a>
+      <br>
+      <strong>Report 1 | Text model evaluation</strong>
+      <br>
+      A comparison of five LLMs giving investment advice at three historical pre-crash moments.
+      <br>
+      <a href="./01-text-llm-evaluation/">Open folder</a>
+    </td>
+    <td width="33%" valign="top">
+      <a href="./02-image-model-association/AI應用第二次報告-林庭蔚.pdf">
+        <img src="./assets/readme-previews/AI應用第二次報告-林庭蔚.pdf.png" alt="Report 2 preview" width="100%">
+      </a>
+      <br>
+      <strong>Report 2 | Image-model association</strong>
+      <br>
+      Eighteen implicit prompts used to compare how GPT and Gemini fill cultural gaps.
+      <br>
+      <a href="./02-image-model-association/AI應用第二次報告-林庭蔚.pdf">View PDF</a> · <a href="./02-image-model-association/">Open folder</a>
+    </td>
+    <td width="33%" valign="top">
+      <a href="./03-video-oop-pipeline/AI應用第三次報告-林庭蔚.pdf">
+        <img src="./assets/readme-previews/AI應用第三次報告-林庭蔚.pdf.png" alt="Report 3 preview" width="100%">
+      </a>
+      <br>
+      <strong>Report 3 | Text-to-video workflow</strong>
+      <br>
+      A watercolor-wuxia short built by chaining script, character, and animation generation.
+      <br>
+      <a href="./03-video-oop-pipeline/AI應用第三次報告-林庭蔚.pdf">View PDF</a> · <a href="./03-video-oop-pipeline/">Open folder</a>
+    </td>
+  </tr>
+</table>
+
+
 ## What is in this repo
 
 - **Text model evaluation**: five LLMs are placed at three historical pre-crash moments to test whether their investment advice reflects judgment or just confident language.

@@ -5,6 +5,47 @@
 中文 / [English](./README.en.md)
 
 
+## 作品預覽
+
+<table>
+  <tr>
+    <td width="33%" valign="top">
+      <a href="./01-text-llm-evaluation/">
+        <img src="./assets/readme-previews/report-1-text-llm-evaluation.svg" alt="報告一預覽" width="100%">
+      </a>
+      <br>
+      <strong>報告一｜文字模型評估</strong>
+      <br>
+      比較五個 LLM 在三個歷史崩盤前夕的投資建議可信度。
+      <br>
+      <a href="./01-text-llm-evaluation/">打開資料夾</a>
+    </td>
+    <td width="33%" valign="top">
+      <a href="./02-image-model-association/AI應用第二次報告-林庭蔚.pdf">
+        <img src="./assets/readme-previews/AI應用第二次報告-林庭蔚.pdf.png" alt="報告二預覽" width="100%">
+      </a>
+      <br>
+      <strong>報告二｜圖像模型聯想</strong>
+      <br>
+      用 18 組暗示型提示觀察 GPT 與 Gemini 如何填補文化空白。
+      <br>
+      <a href="./02-image-model-association/AI應用第二次報告-林庭蔚.pdf">查看 PDF</a> · <a href="./02-image-model-association/">打開資料夾</a>
+    </td>
+    <td width="33%" valign="top">
+      <a href="./03-video-oop-pipeline/AI應用第三次報告-林庭蔚.pdf">
+        <img src="./assets/readme-previews/AI應用第三次報告-林庭蔚.pdf.png" alt="報告三預覽" width="100%">
+      </a>
+      <br>
+      <strong>報告三｜文字到影片流程</strong>
+      <br>
+      以水墨武俠短片串接腳本、角色與動畫三個生成階段。
+      <br>
+      <a href="./03-video-oop-pipeline/AI應用第三次報告-林庭蔚.pdf">查看 PDF</a> · <a href="./03-video-oop-pipeline/">打開資料夾</a>
+    </td>
+  </tr>
+</table>
+
+
 ## 這裡有什麼
 
 - **文字模型評估**:把五個 LLM 放到三個歷史崩盤前夕,檢查它們給投資建議時到底是判斷力不足,還是只是語氣很像懂。
