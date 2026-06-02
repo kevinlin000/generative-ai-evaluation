@@ -1,72 +1,129 @@
 # Generative AI Evaluation
 
-Model comparison and evaluation across three generative modalities: text, image, and video. All three reports share one method: hold the input fixed, control the variables, run the same test across several models, then score on explicit dimensions, attribute the differences, and iterate.
+This repository contains three evaluation projects across text, image, and video generation. All three follow the same basic approach: hold the input steady, control the variables, compare the outputs, and make the differences explicit. For me, the work is not only about testing models. It is also a record of how I frame a problem, build an evaluation method, organize evidence, and make decisions under practical constraints.
 
 [中文](./README.md) / English
 
 
-## Report 1: Reliability of LLM investment advice before a crash
+## What is in this repo
 
-**Question.** On the eve of a market crash, is the investment advice an LLM produces trustworthy?
-
-**Design.** A controlled experiment across five models (ChatGPT 5.3, Claude Opus 4.7, Gemini 3.1 Pro, DeepSeek R1, TAIDE) at three historical pre-crash dates: 2008 Lehman, the 2022 Taiwan peak, and the 2024 AI-bubble peak. Each scenario applied the same five-stage prompt chain: comprehension check, recommendation, adversarial pushback, temporal-contamination probe, and JSON-schema compliance. Only the date and market data changed between scenarios; instructions and the individual's constraints were held constant, so differences in performance can be attributed to the time point itself. 75 conversations in total, with full transcripts retained.
-
-**Scoring.** Six dimensions, scored on two tracks (human and LLM-as-judge). Inter-rater agreement: Pearson r = 0.801.
-
-**Results.**
-- Systematic underestimation of downside risk: at the 2008 and 2022 dates, four of five models were over-optimistic, with the largest error (TAIDE, 2022) missing the actual six-month return by 24.9 points. Only 2024, the date closest to the training cutoff and with the least subsequent history, was accurate across all five.
-- Self-preference bias in the LLM judge: with Claude as the judge, Claude's own answers scored about 11 points higher than the human rating, concentrated in the temporal-contamination dimension. Single-model evaluation is therefore unreliable and needs human or cross-model validation.
-- Fluency is not usability: TAIDE produced fluent prose but failed JSON-schema validation in two of three scenarios (percentages summing to 174.5%), leaving the output unparseable downstream.
-
-See `01-text-llm-evaluation/`: transcripts, the scoring matrix, alignment against real historical returns, slides, and script.
+- **Text model evaluation**: five LLMs are placed at three historical pre-crash moments to test whether their investment advice reflects judgment or just confident language.
+- **Image model evaluation**: prompts avoid naming the target directly and use only semantic cues, to see what each model associates first and how safety rules intervene.
+- **Text-to-video pipeline**: script, character, and animation generation are chained into a short ink-wash wuxia film, with model tradeoffs documented at each stage.
 
 
-## Report 2: How image models associate from implicit prompts
+## How these projects are put together
 
-**Question.** When a prompt deliberately avoids naming its target and gives only semantic cues, what does each model reach for first?
-
-**Design.** 18 implicit prompts (describing traits, setting, and period instead of naming anyone) were given as identical input to GPT and Gemini, and the outputs were classified into three types: cultural consensus (both models converge on the same referent), semantic divergence (the same description is read as a different figure or a different era), and safety boundary (refusal, substitution with a historical or abstract stand-in, or a copyright filter).
-
-**Observation.** Image generation is not a plain text-to-pixel mapping; the output is a choice the model makes among its training-data memory, its weighting of context, and the platform's safety rules. Beyond resemblance, then, the more informative questions are why it associated as it did, which cues it ignored, and which rules constrained it.
-
-**Usage note.** Some prompts tested whether the models would generate recognizable real politicians. If this goes in a public portfolio, frame it as an observation of model behavior and safety boundaries rather than as "making AI draw a specific politician," which is easy to misread.
-
-See `02-image-model-association/`.
+- The three projects span different modalities, but they use the same evaluation mindset rather than three unrelated demos.
+- The focus is not "can the model generate something," but "why did it generate this, where is it reliable, and where does it fail."
+- Each report includes a concrete question, traceable materials, and specific findings instead of only polished outputs.
+- As portfolio work, they show how I define a problem, design a comparison, interpret results, and make tradeoffs instead of only producing a final artifact.
 
 
-## Report 3: An end-to-end text-to-video pipeline
+## Report 1  Reliability of LLM investment advice before a crash
 
-**Goal.** Chain three modalities (text for the script, image for the characters, video for the animation) into a roughly two-minute ink-wash wuxia short, 松風武林·物件導向之卷, that explains the three OOP concepts (encapsulation, inheritance, polymorphism) through narrative, comparing models at each stage.
+**Core question**
 
-**Stage decisions.**
-- Script (ChatGPT vs Gemini), same world-setting as input: Gemini was stronger on structure and conceptual clarity, ChatGPT on humor. The final script merged both, with a subtitle at the end of each scene mapping the wuxia metaphor back to the actual programming term as a teaching anchor.
-- Characters (GPT image 2.0 vs Gemini Nano Banana): Gemini auto-produces multi-angle reference sheets with high character consistency, but the third scene (polymorphism) needed three characters in one frame, distinguishable by color within a second, so GPT image 2.0 was chosen. The criterion was fitness for the task, not visual polish.
-- Video (Sora originally, switched to Google Flow / Veo): Sora was discontinued in 2026-04, so the workflow moved to Veo with no rework of upstream assets; final edit in CapCut.
+At the exact moments when markets are easiest to misread, how trustworthy is LLM investment advice?
 
-**Technical notes.**
-- Character consistency: use Flow's "character" feature to lock a fixed reference image and bind every generated segment to it, suppressing cross-shot appearance drift.
-- Prompt control: fix the camera and center the subject; state key details explicitly and repeat them; explicitly exclude off-frame people, or spurious limbs appear. Whatever is left unspecified, the model fills in, usually unfavorably.
-- Evaluation criterion: a single metric, whether the output achieved the intended effect. The multi-character shot was scored 3/5 because it still drifts.
+**Method**
 
-Final video: https://www.youtube.com/watch?v=xWoazdwDa2A  See `03-video-oop-pipeline/`.
+Five models (ChatGPT 5.3, Claude Opus 4.7, Gemini 3.1 Pro, DeepSeek R1, TAIDE) were tested at three historical dates: 2008 Lehman, the 2022 Taiwan peak, and the 2024 AI-bubble peak. Each scenario used the same five-stage prompt chain. Only the date and market data changed; the rest stayed fixed. The dataset contains 75 full conversation transcripts.
+
+**Main findings**
+
+- At both the 2008 and 2022 dates, 4 out of 5 models systematically underestimated downside risk.
+- The largest miss came from TAIDE in the 2022 scenario, off by 24.9 percentage points against the real six-month return.
+- Claude, when used as the judge, scored its own answers noticeably higher than human raters did.
+- TAIDE often sounded fluent while still failing JSON schema validation, which made its output unusable downstream.
+
+**Scoring**
+
+Six dimensions, rated on two tracks: human and LLM-as-judge. Inter-rater agreement: Pearson r = 0.801.
+
+**See**
+
+`01-text-llm-evaluation/` includes transcripts, scoring data, ground-truth comparisons, screenshots, slides, and script notes.
+
+
+## Report 2  How image models associate from implicit prompts
+
+**Core question**
+
+When a prompt deliberately avoids naming the target, which cues do models prioritize first, and where do they end up?
+
+**Method**
+
+Eighteen implicit prompts were designed using traits, scenes, and time-period clues instead of direct names. The same prompts were given to GPT and Gemini. Outputs were grouped into three categories: cultural consensus, semantic divergence, and safety boundary.
+
+**Main findings**
+
+- Some prompts produced stable convergence across both models, suggesting strong shared cultural associations.
+- Some prompts split the models toward entirely different people or eras, revealing differences in semantic weighting.
+- Safety rules were not an afterthought. They directly shaped the final output.
+
+**What this report is really looking at**
+
+This is not mainly a resemblance test. It looks at how image generation is shaped at the same time by training memory, contextual interpretation, and platform rules.
+
+**See**
+
+`02-image-model-association/`
+
+
+## Report 3  An end-to-end text-to-video pipeline
+
+**Core goal**
+
+Build a roughly two-minute ink-wash wuxia short, 松風武林·物件導向之卷, that explains encapsulation, inheritance, and polymorphism through narrative by chaining script generation, character generation, and video generation into one workflow.
+
+**Pipeline**
+
+- Script: compare ChatGPT and Gemini on the same world-setting input, then merge their strengths.
+- Characters: compare GPT image 2.0 and Gemini Nano Banana, then choose based on the needs of the third multi-character scene.
+- Video: the original plan used Sora, but after Sora was discontinued in April 2026, the workflow moved to Google Flow / Veo without rebuilding upstream assets.
+
+**Main findings**
+
+- The hard problem was not single-image quality. It was cross-shot character consistency.
+- For multi-character scenes, task fit mattered more than visual polish.
+- Once the workflow was decomposed into stages, swapping a model mid-project did not require restarting the entire production.
+
+**Technical notes**
+
+- Flow's character feature was used to bind fixed reference images and reduce appearance drift.
+- Fixed camera position, centered subjects, and repeated key constraints worked better than adding more descriptive flourish.
+- Anything left unspecified was likely to be invented by the model, usually in an unhelpful way.
+
+**See**
+
+Final video: https://www.youtube.com/watch?v=xWoazdwDa2A
+
+Full materials and report: `03-video-oop-pipeline/`
 
 
 ## Limitations
 
-All three are small case studies, not statistically significant empirical research: the samples are small, the prompts were author-designed, and generation is stochastic (re-runs vary). Report 1's LLM judge carries its own bias, balanced but not removed by manual scoring, and the 2024 ground truth has only a few months of post-event data, so its long-term reliability is untested.
+All three projects are small case studies rather than statistically significant empirical studies. Sample sizes are limited, prompts are author-designed, and generation is stochastic. The LLM judge in Report 1 carries its own bias even after manual balancing, and the 2024 ground truth still has only a short post-event horizon.
 
 
-## Tools
+## Tools used
 
-Text: ChatGPT, Claude, Gemini, DeepSeek, TAIDE, all through their web interfaces rather than the API, to preserve real user-facing behavior including system prompts and retrieval augmentation. Image: GPT image 2.0, Gemini (Nano Banana). Video: Google Flow (Veo), edited in CapCut. Scoring and analysis: Python.
+Text: ChatGPT, Claude, Gemini, DeepSeek, and TAIDE, all through web interfaces rather than the API, to preserve real user-facing behavior including system prompts and retrieval augmentation.
+
+Image: GPT image 2.0 and Gemini (Nano Banana).
+
+Video: Google Flow (Veo), with final editing in CapCut.
+
+Scoring and analysis: Python.
 
 
-## Structure
+## Repo structure
 
-```
+```text
 generative-ai-evaluation/
-├── README.md        # Chinese
-├── README.en.md     # English
+├── README.md
+├── README.en.md
 ├── 01-text-llm-evaluation/
 ├── 02-image-model-association/
 └── 03-video-oop-pipeline/
