@@ -10,15 +10,15 @@ This repository contains three evaluation projects across text, image, and video
 <table>
   <tr>
     <td width="33%" valign="top">
-      <a href="./01-text-llm-evaluation/">
-        <img src="./assets/readme-previews/report-1-text-llm-evaluation.svg" alt="Report 1 preview" width="100%">
+      <a href="./01-text-llm-evaluation/AI應用第一次報告簡報_514230187林庭蔚.pdf">
+        <img src="./assets/readme-previews/AI應用第一次報告簡報_514230187林庭蔚.pdf.png" alt="Report 1 preview" width="100%">
       </a>
       <br>
       <strong>Report 1 | Text model evaluation</strong>
       <br>
       A comparison of five LLMs giving investment advice at three historical pre-crash moments.
       <br>
-      <a href="./01-text-llm-evaluation/">Open folder</a>
+      <a href="./01-text-llm-evaluation/AI應用第一次報告簡報_514230187林庭蔚.pdf">View PDF</a> · <a href="./01-text-llm-evaluation/">Open folder</a>
     </td>
     <td width="33%" valign="top">
       <a href="./02-image-model-association/AI應用第二次報告-林庭蔚.pdf">
